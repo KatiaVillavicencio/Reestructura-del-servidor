@@ -26,8 +26,8 @@ import {generateAndSetToken} from "./config/token.config.js"
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import { ExtractJwt as ExtractJwt } from 'passport-jwt';
 
-import UserManager from './dao/managers/UserManagerMongo.js';
-import CartManager from './dao/managers/cartManagerMongo.js';
+import UserManager from './dao/classes/userManagerMongo.js';
+import CartManager from './dao/classes/cartManagerMongo.js';
 
 
 const app = express();
@@ -58,7 +58,7 @@ const httpServer=app.listen(PORT,()=>{
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl: "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce",
+            mongoUrl: process.env.URI,
             mongoOptions:{
             useNewUrlParser: true,
             useUnifiedTopology: true},
@@ -129,7 +129,7 @@ app.get("/products", async (req, res) => {
 })
 app.get("/carts/:cid", async (req, res) => {
     let id = req.params.cid
-    let allCarts  = await cart.getCartWithProducts(id)
+    let allCarts  = await carts.getCartWithProducts(id)
     res.render("viewCart", {
         title: "Vista Carro",
         carts : allCarts

@@ -1,11 +1,16 @@
+
+import dontenv from "dotenv";
+dontenv.config();
+
 import mongoose from "mongoose";
 
 
-const URI = "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce";
+
+//const URI = "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce";
 
 const connectToDB = async () => {
     try {
-        await mongoose.connect(URI, {
+        await mongoose.connect(process.env.URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });

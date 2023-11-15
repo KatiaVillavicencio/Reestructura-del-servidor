@@ -1,4 +1,4 @@
-import UserManager from "../dao/managers/UserManagerMongo.js" 
+import UserManager from "../dao/classes/userManagerMongo.js" 
 import { Router } from "express"
 import passport from "passport"
 
