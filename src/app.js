@@ -6,7 +6,7 @@ import MongoStore from "connect-mongo";
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 
-import connectToDB from "./config/server.config.js"
+import connectToDB, { configSession } from "./config/server.config.js"
 import {__dirname, authorization, passportCall} from "./utils.js"
 import initializePassword from './config/passport.config.js';
 
@@ -29,24 +29,21 @@ import { ExtractJwt as ExtractJwt } from 'passport-jwt';
 import UserManager from './dao/classes/userManagerMongo.js';
 import CartManager from './dao/classes/cartManagerMongo.js';
 
-
 const app = express();
 const PORT = process.env.PORT || 8080
 
 app.use(express.static(__dirname+"/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use (cookieParser())
-
-
+app.use(cookieParser())
 
 //estructura de handlebars
 app.engine("handlebars",handlebars.engine())
 app.set('view engine', 'handlebars');
 app.set("views",__dirname+"/views")
 
-
-connectToDB()
+//connect 
+connectToDB();
 
 const httpServer=app.listen(PORT,()=>{
     console.log(`server escuchandoooo en ${PORT}`)
@@ -54,21 +51,8 @@ const httpServer=app.listen(PORT,()=>{
  const users = new UserManager
  const carts = new CartManager
 
-//session login//
-app.use(
-    session({
-        store: MongoStore.create({
-            mongoUrl: process.env.URI,
-            mongoOptions:{
-            useNewUrlParser: true,
-            useUnifiedTopology: true},
-            ttl: 15
-        }),
-        secret: "ClaveSecreta",
-        resave: false,
-        saveUninitialized: false,
-    })
-)
+//connet session login//
+app.use (configSession);
 
 //JWT//
 
@@ -90,7 +74,6 @@ return done(null,user)
 })
 )
 
-
 //Middleware passport
 initializePassword();
 app.use (passport.initialize());
@@ -101,7 +84,6 @@ app.use('/api/products', routerP)
 app.use('/api/carts', routerC)
 app.use('/', routerV);
 app.use('/api/sessions',userRouter)
-
 
 //socket server
 const socketServer = new Server(httpServer)
