@@ -26,7 +26,7 @@ import {generateAndSetToken} from "./config/token.config.js"
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import { ExtractJwt as ExtractJwt } from 'passport-jwt';
 
-import UserManager from './dao/classes/userManagerMongo.js';
+import UserManager from './dao/classes/userManagerMongo.js';//==============//
 import CartManager from './dao/classes/cartManagerMongo.js';
 
 const app = express();
