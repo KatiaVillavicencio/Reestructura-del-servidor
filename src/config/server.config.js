@@ -1,11 +1,7 @@
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import dontenv from "dotenv";
-
-
 dontenv.config();
-
-//const URI = "mongodb+srv://KatiaV:123@cluster0.y9v3q8o.mongodb.net/Ecommerce";
 
 const connectToDB = async () => {
     try {

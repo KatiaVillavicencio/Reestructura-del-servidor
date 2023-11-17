@@ -58,7 +58,7 @@ app.use (configSession);
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "Secret-key"
+    secretOrKey:process.env.PRIVATE_KEY_JWT
 }
 
 passport.use (
