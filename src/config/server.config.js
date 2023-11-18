@@ -17,7 +17,6 @@ const connectToDB = async () => {
 
 export default connectToDB;
 
-
 //Session//
 
 export function configSession  () {
