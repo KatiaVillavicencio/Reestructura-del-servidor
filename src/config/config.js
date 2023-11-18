@@ -6,6 +6,10 @@ dotenv.config();
 export default {
  URI: process.env.URI,
  PORT : process.env.PORT,
+ 
  PRIVATE_KEY_JWT: process.env.PRIVATE_KEY_JWT,
- KEY_TOKEN: process.env.KEY_TOKEN
+
+ ClientID: process.env.CLIENT_ID,
+ ClienteSecret: process.env.CLIENT_SECRET,
+ CallbackURL: process.env.CALLBACK_URL,
 };
