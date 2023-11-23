@@ -1,6 +1,8 @@
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import dontenv from "dotenv";
+import session from 'express-session'
+
 dontenv.config();
 
 const connectToDB = async () => {

@@ -174,7 +174,7 @@ app.get("/profile", async (req, res) => {
     });
 })*/
 
-/*app.get ('/', (req, res) => {
+app.get ('/', (req, res) => {
     res.sendFile ('html/index.html',{root: app.get ("views") });
 });
 app.get('/register', (req, res) => {
@@ -182,4 +182,4 @@ app.get('/register', (req, res) => {
 });
 app.get('/current', passportCall ('jwt'), authorization ('user'), (req, res) => {
     res.sendFile ('html/home.html',{root: app.get ("views") });
-});*/
+});
