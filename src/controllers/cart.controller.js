@@ -1,4 +1,4 @@
-const CartManager = require("../dao/classes/cartManagerMongo.js");
+import CartManager from "../dao/classes/cartManagerMongo.js";
 
 const cartsService = new CartManager();
 
