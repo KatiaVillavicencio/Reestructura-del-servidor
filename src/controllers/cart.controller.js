@@ -1,57 +1,61 @@
-
-import CartManager from "../dao/classes/cartManagerMongo.js";
+const CartManager = require("../dao/classes/cartManagerMongo.js");
 
 const cartsService = new CartManager();
 
-
-export const getAllCarts = async (req , res) => {
+const getAllCarts = async (req, res) => {
     try {
-        res.status(200).send({status : "success", payload: await cartsService.getAll()})
+        res.status(200).send({ status: "success", payload: await cartsService.getAll() });
     } catch (error) {
-        res.status(404).send({status : "Error", error: "Carritos no encontrados"})
+        res.status(404).send({ status: "Error", error: "Carritos no encontrados" });
     }
-}
+};
 
-export const getCartById = async (req , res) => {
+const getCartById = async (req, res) => {
     try {
-        res.status(200).send({status : "success", payload : await cartsService.getById(req.params.cid)});
+        res.status(200).send({ status: "success", payload: await cartsService.getById(req.params.cid) });
     } catch (error) {
-        res.status(404).send({status : "Error", error: "Carrito no encontrado"})
+        res.status(404).send({ status: "Error", error: "Carrito no encontrado" });
     }
-}
+};
 
-export const addCart = async (req , res) => {
+const addCart = async (req, res) => {
     await cartsService.add();
-    res.status(201).send({status : "success", payload : 'Carrito creado con exito'})
-}
+    res.status(201).send({ status: "success", payload: 'Carrito creado con exito' });
+};
 
-
-export const addProductInCart = async (req , res) => {
+const addProductInCart = async (req, res) => {
     try {
-        await cartsService.addProduct(req.params.cid , req.params.pid)
-        res.status(200).send({status : "success", payload : "Producto agregado con exito"});
+        await cartsService.addProduct(req.params.cid, req.params.pid);
+        res.status(200).send({ status: "success", payload: "Producto agregado con exito" });
     } catch (error) {
-        res.status(404).send({status : "Error", error: "Carrito o producto no encontrado"})
+        res.status(404).send({ status: "Error", error: "Carrito o producto no encontrado" });
     }
-}
+};
 
-export const deleteProductInCart = async (req , res) => {
+const deleteProductInCart = async (req, res) => {
     try {
-        await cartsService.deleteProduct(req.params.cid , req.params.pid);
-        res.status(200).send({status : "success", payload : 'Producto borrado con exito'})
+        await cartsService.deleteProduct(req.params.cid, req.params.pid);
+        res.status(200).send({ status: "success", payload: 'Producto borrado con exito' });
     } catch (error) {
-        res.status(404).send({status : "Error", error: "Carrito o producto no encontrado"})
+        res.status(404).send({ status: "Error", error: "Carrito o producto no encontrado" });
     }
-}
+};
 
-
-export const updateProduct = async (req , res) => {
+const updateProduct = async (req, res) => {
     try {
-        await cartsService.update(req.params.cid , req.params.pid , req.body.quantity)
-        res.status(200).send({status : "success", payload : "Producto actualizado con exito"});
+        await cartsService.update(req.params.cid, req.params.pid, req.body.quantity);
+        res.status(200).send({ status: "success", payload: "Producto actualizado con exito" });
     } catch (error) {
-        res.status(400).send({status : "Error", error: "Por favor ingrese solo números en la cantidad"})
+        res.status(400).send({ status: "Error", error: "Por favor ingrese solo números en la cantidad" });
     }
-}
+};
 
+module.exports = {
+    getAllCarts,
+    getCartById,
+    addCart,
+    addProductInCart,
+    deleteProductInCart,
+    updateProduct,
+};
 
